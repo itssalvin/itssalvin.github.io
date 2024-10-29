@@ -10,7 +10,24 @@
   filter: blur(7px);
   z-index: -1;
 }
+#video-background {
+  object-fit: cover;
+  height: 100vh;
+  width: 100vw;
+  margin: auto;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  filter: blur(2px); /* 减小模糊程度 */
+  z-index: -1;
+  transition: filter 0.3s ease; /* 添加过渡效果 */
+}
 
+/* 可以添加hover效果让视频更清晰 */
+#video-background:hover {
+  filter: blur(1px);
+}
 .outer-container {
   display: flex;
   justify-content: center;
@@ -55,32 +72,43 @@
   z-index: 4;
   bottom: -10%;
   display: grid;
-  grid-template-colums: 35px 255px 35px;
+  grid-template-columns: 35px 200px 80px;
   grid-template-rows: 85px 25px 25px;
   grid-template-areas:
-    "one two two three"
-    "four four four four"
-    "five five five five";
+    "one two three"  /* 移除额外的 "two" */
+    "four four four"
+    "five five five";
   column-gap: 10px;
+  overflow: visible;
 }
 
 .play-pause {
   grid-area: one;
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;  /* 改为居中 */
   align-items: center;
+  width: 100%;  /* 确保占满空间 */
+  height: 100%; 
+  padding:10px /* 确保占满空间 */
 }
-.fa-pause-circle {
-  filter: invert(1);
+.vampire-btn {
+  font-size: 1.5rem;  /* 调小一点 */
+  filter: grayscale(100%);
+  transition: all 450ms ease;
   cursor: pointer;
-  display: none;
+  margin: 0;  /* 移除所有边距 */
+  padding: 0;  /* 移除所有内边距 */
+  line-height: 1;  /* 确保垂直对齐 */
 }
-
-#play,
+.vampire-btn.playing {
+  filter: grayscale(0%) drop-shadow(0 8px 8px rgba(249, 76, 87, 0.5));
+}
+.vampire-btn:hover {
+  transform: scale(1.55);
+}
 #prev-track,
 #next-track {
-  filter: invert(1);
-  cursor: pointer;
+  filter: none;
 }
 
 .track-info {
@@ -111,38 +139,62 @@
   grid-area: three;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  /* border: 1px solid red; */
+  justify-content: flex-start; /* 改为flex-start让按钮靠上 */
+  align-items: flex-start; /* 改为flex-start让按钮靠左 */
+  width: 100%;
+  height: 100%;
+  padding-top: 15px; /* 添加上边距 */
+  padding-right: 30px; /* 添加左边距 */
+  margin-right :20px;
 }
 
+.next-prev button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.6rem; /* 调大字体 */
+  padding: 3px;
+  color: #333;
+  transition: transform 0.2s ease;
+  margin: 2px 0;
+}
+
+
+
+.next-prev button:hover {
+  transform: scale(1.3);
+  color: #000; /* 悬停时变为黑色 */
+}
 .progress-bar {
   grid-area: four;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  /* border: 1px solid red; */
 }
 
-#progressBar {
-  appearance: none;
-  height: 5px;
-  background: white;
-  width: 57.5%;
-  outline: none;
-  border-radius: 30px;
+#progress {
+  width: 57.5%;  /* 保持原来进度条的宽度 */
+  height: 130px;
+  fill: none;
+  color : #7c63de;
 }
 
-#progressBar::-webkit-slider-thumb {
-  appearance: none;
-  height: 11px;
-  width: 11px;
-  outline: none;
-  background: #f94c57;
-  border-radius: 30px;
-  cursor: pointer;
+.progress-path {
+  stroke: #7c63de;
+  stroke-dasharray: 0;
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset 0.1s linear;
 }
-
+#progress:hover .progress-path {
+  stroke: #8b74e8;  /* 悬停时颜色略微变亮 */
+}
+.progress-path {
+  /* 添加发光效果 */
+  filter: drop-shadow(0 0 2px #7c63de);
+  /* 平滑过渡 */
+  transition: stroke 0.3s ease, filter 0.3s ease, stroke-dashoffset 0.1s linear;
+}
 .track-time {
   grid-area: five;
   display: flex;

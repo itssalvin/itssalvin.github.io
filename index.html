@@ -15,8 +15,13 @@
 <body>
 <!-- partial:index.partial.html -->
 <div class="outer-container">
-  <img src="1.png" alt="fuckoff" id="background" />
-  <audio src="2024.mp3" id="track"></audio>
+  <audio id="track"></audio>
+  <video id="video-background" loop muted playsinline style="display: none">
+    <source src="video.mp4" type="video/mp4">
+  </video>
+  <img src="1.png" id="background">
+ 
+  
 </div>
 
 <div class="player-container">
@@ -24,19 +29,25 @@
 
   <div class="box">
     <div class="play-pause">
-      <i class="far fa-play-circle fa-3x" id="play"></i>
-      <i class="far fa-pause-circle fa-3x" id="pause"></i>
+       <span class="vampire-btn">🧛</span>
     </div>
     <div class="track-info">
       <div id="track-artist">playboi carti</div>
       <div id="track-title">2024</div>
     </div>
     <div class="next-prev">
-      <i class="far fa-arrow-alt-circle-left fa-2x" id="prev-track"></i>
-      <i class="far fa-arrow-alt-circle-right fa-2x" id="next-track"></i>
+        <button id="prev-track">👈🏻</button>
+        <button id="next-track">👉🏾</button>
     </div>
     <div class="progress-bar">
-      <input type="range" id="progressBar" min="0" max="" value="0" />
+      <svg id="progress" viewBox="0 0 100 100" width="100%" height="30">
+        <g fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+          <!-- 背景线 -->
+          <path stroke="rgba(255, 255, 255, 0.2)" d="M 0 50 12.5 50 18.75 65.5 25 50 37.5 50 43.75 34.1 56.25 60.87 62.5 50 68.75 50 75 15.38 81.25 50 87.5 50 93.75 71.33 100 50"/>
+          <!-- 进度线 -->
+          <path stroke="currentColor" class="progress-path" d="M 0 50 12.5 50 18.75 65.5 25 50 37.5 50 43.75 34.1 56.25 60.87 62.5 50 68.75 50 75 15.38 81.25 50 87.5 50 93.75 71.33 100 50"/>
+        </g>
+      </svg>
     </div>
     <div class="track-time">
       <div id="currentTime"></div>
