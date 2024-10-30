@@ -15,7 +15,7 @@ let playing =true;
 
 // 音乐列表数据
 const tracks = ["2024.mp3", "righteous.mp3", "nonstop.mp3", "SOUTH OF FRANCE .mp3"];
-const thumbnails = ["1.png", "juicewrld.png", "drake.png", "france.png"];
+const thumbnails = ["2.png", "juicewrld.png", "drake.png", "france.png"];
 const trackArtists = ["playboi carti", "juice wrld", "drake", "future"];
 const trackTitles = ["2024", "righteous", "nonstop", "SOUTH OF FRANCE"];
 

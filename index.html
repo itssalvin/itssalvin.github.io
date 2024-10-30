@@ -25,33 +25,34 @@
 </div>
 
 <div class="player-container">
-  <img src="1.png" alt="Harry Styles' Fine Line album cover" id="thumbnail" />
-
-  <div class="box">
-    <div class="play-pause">
-       <span class="vampire-btn">🧛</span>
-    </div>
-    <div class="track-info">
-      <div id="track-artist">playboi carti</div>
-      <div id="track-title">2024</div>
-    </div>
-    <div class="next-prev">
-        <button id="prev-track">👈🏻</button>
-        <button id="next-track">👉🏾</button>
-    </div>
-    <div class="progress-bar">
-      <svg id="progress" viewBox="0 0 100 100" width="100%" height="30">
-        <g fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-          <!-- 背景线 -->
-          <path stroke="rgba(255, 255, 255, 0.2)" d="M 0 50 12.5 50 18.75 65.5 25 50 37.5 50 43.75 34.1 56.25 60.87 62.5 50 68.75 50 75 15.38 81.25 50 87.5 50 93.75 71.33 100 50"/>
-          <!-- 进度线 -->
-          <path stroke="currentColor" class="progress-path" d="M 0 50 12.5 50 18.75 65.5 25 50 37.5 50 43.75 34.1 56.25 60.87 62.5 50 68.75 50 75 15.38 81.25 50 87.5 50 93.75 71.33 100 50"/>
-        </g>
-      </svg>
-    </div>
-    <div class="track-time">
-      <div id="currentTime"></div>
-      <div id="durationTime"></div>
+  <img src="gouzi.png" alt="Harry Styles' Fine Line album cover" id="thumbnail" />
+  <div class="box-wrapper">
+    <div class="box">
+      <div class="play-pause">
+        <span class="vampire-btn">🧛</span>
+      </div>
+      <div class="track-info">
+        <div id="track-artist">playboi carti</div>
+        <div id="track-title">2024</div>
+      </div>
+      <div class="next-prev">
+          <button id="prev-track">👈🏻</button>
+          <button id="next-track">👉🏾</button>
+      </div>
+      <div class="progress-bar">
+        <svg id="progress" viewBox="0 0 100 100" width="100%" height="30">
+          <g fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+            <!-- 背景线 -->
+            <path stroke="rgba(255, 255, 255, 0.2)" d="M 0 50 12.5 50 18.75 65.5 25 50 37.5 50 43.75 34.1 56.25 60.87 62.5 50 68.75 50 75 15.38 81.25 50 87.5 50 93.75 71.33 100 50"/>
+            <!-- 进度线 -->
+            <path stroke="currentColor" class="progress-path" d="M 0 50 12.5 50 18.75 65.5 25 50 37.5 50 43.75 34.1 56.25 60.87 62.5 50 68.75 50 75 15.38 81.25 50 87.5 50 93.75 71.33 100 50"/>
+          </g>
+        </svg>
+      </div>
+      <div class="track-time">
+        <div id="currentTime"></div>
+        <div id="durationTime"></div>
+      </div>
     </div>
   </div>
 </div>

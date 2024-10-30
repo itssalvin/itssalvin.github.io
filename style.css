@@ -40,17 +40,17 @@
   flex-direction: column;
   position: absolute;
   height: 400px;
-  width: 325px;
+  width: 345px;
   margin: auto;
   top: 0;
   left: 0;
-  right: 0;
+  right: 0; 
   bottom: 0;
   overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 10px;
+  border-radius: 30px;
   box-shadow: 0 0 30px #f94c57;
 }
 
@@ -63,23 +63,49 @@
   transition: 1s;
   z-index: 3;
 }
-
-.box {
+/* 修改 box-wrapper */
+.box-wrapper {
   position: absolute;
+  border-radius: 20px;
   height: 45%;
   width: 100%;
-  background: linear-gradient(90deg, rgb(145, 145, 145), rgb(220, 220, 220));
-  z-index: 4;
-  bottom: -10%;
+  bottom: -10%;  /* 只在wrapper中设置底部偏移 */
+  z-index: 5;
+  background: rgba(255, 255, 255, 0.1);  /* 微妙的白色背景 */
+  backdrop-filter: blur(12px);  /* 磨砂效果 */
+  -webkit-backdrop-filter: blur(12px);  /* Safari 支持 */
+  
+  /* 渐变叠加 */
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0.05) 50%,
+    rgba(255, 255, 255, 0) 100%
+   ) /* 背景色移到wrapper */
+} 
+
+/* 修改 box */
+.box {
+  position: absolute;  /* 改回absolute */
+  height: 100%;
+  width: 100%;
+  top: 0;  /* 确保box完全覆盖wrapper */
+  left: 0;
+  /* 删除 bottom: -10% */  /* 因为已经在wrapper中设置了 */
   display: grid;
   grid-template-columns: 35px 200px 80px;
   grid-template-rows: 85px 25px 25px;
+  border-radius: 20px;
   grid-template-areas:
-    "one two three"  /* 移除额外的 "two" */
+    "one two three"
     "four four four"
     "five five five";
   column-gap: 10px;
-  overflow: visible;
+  overflow: hidden;
+  opacity: 1;
+  
+  /* 删除 background-color，因为现在在wrapper中设置 */
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
 }
 
 .play-pause {
