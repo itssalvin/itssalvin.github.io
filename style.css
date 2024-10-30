@@ -59,7 +59,6 @@
   object-fit: fill;
   height: 100%;
   width: 100%;
-  top: -10%;
   transition: 1s;
   z-index: 3;
 }
@@ -132,10 +131,7 @@
 .vampire-btn:hover {
   transform: scale(1.55);
 }
-#prev-track,
-#next-track {
-  filter: none;
-}
+
 
 .track-info {
   grid-area: two;
@@ -149,7 +145,7 @@
 
 #track-artist {
   color: #f94c57;
-  font-family: "Lato", sans-serif;
+  font-family: "DynaPuff", sans-serif;
   font-weight: bold;
   font-size: 1.125rem;
   text-shadow: 0 0 15px white;
@@ -157,7 +153,7 @@
 
 #track-title {
   color: white;
-  font-family: "Lato", sans-serif;
+  font-family: "Rubik Wet Paint", sans-serif;
   font-size: 1rem;
 }
 
@@ -230,13 +226,13 @@
 }
 
 #currentTime {
-  font-family: "Lato", sans-serif;
+  font-family: "Rubik Wet Paint", sans-serif;
   font-size: 1rem;
   color: white;
 }
 
 #durationTime {
-  font-family: "Lato", sans-serif;
+  font-family: "Rubik Wet Paint", sans-serif;
   font-size: 1rem;
   color: #f94c57;
   text-shadow: 0 0 15px white;
