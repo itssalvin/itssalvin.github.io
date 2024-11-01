@@ -426,3 +426,95 @@ fill: #002fa7 !important;
 -webkit-animation: activePulse 1s ease-in-out infinite !important;
 animation: activePulse 1s ease-in-out infinite !important;
 }
+/* 进度点动画 - 添加 webkit 前缀 */
+@keyframes empPulse {
+  0% {
+      fill: #002fa7;
+      r: 2;
+      -webkit-filter: drop-shadow(0 0 2px #39FF14);
+      filter: drop-shadow(0 0 2px #39FF14);
+  }
+  25% {
+      fill: #002fa7;
+      r: 3.5;
+      -webkit-filter: drop-shadow(0 0 8px #b002ad) 
+              drop-shadow(0 0 15px #c9058e) 
+              drop-shadow(0 0 25px #c203bf);
+      filter: drop-shadow(0 0 8px #b002ad) 
+              drop-shadow(0 0 15px #c9058e) 
+              drop-shadow(0 0 25px #c203bf);
+  }
+  50% {
+      fill: #002fa7;
+      r: 2;
+      -webkit-filter: drop-shadow(0 0 2px #ff8da1);
+      filter: drop-shadow(0 0 2px #ff8da1);
+  }
+  75% {
+      fill: #002fa7;
+      r: 3.5;
+      -webkit-filter: drop-shadow(0 0 12px #ff8da1) 
+              drop-shadow(0 0 20px #39FF14) 
+              drop-shadow(0 0 30px #ff8da1);
+      filter: drop-shadow(0 0 12px #ff8da1) 
+              drop-shadow(0 0 20px #39FF14) 
+              drop-shadow(0 0 30px #ff8da1);
+  }
+  100% {
+      fill: #002fa7;
+      r: 3;
+      -webkit-filter: drop-shadow(0 0 2px #ff8da1);
+      filter: drop-shadow(0 0 2px #ff8da1);
+  }
+}
+
+/* 添加 webkit 前缀的动画名称 */
+@-webkit-keyframes empPulse {
+  0% {
+      fill: #002fa7;
+      r: 2;
+      -webkit-filter: drop-shadow(0 0 2px #39FF14);
+  }
+  25% {
+      fill: #002fa7;
+      r: 3.5;
+      -webkit-filter: drop-shadow(0 0 8px #b002ad) 
+              drop-shadow(0 0 15px #c9058e) 
+              drop-shadow(0 0 25px #c203bf);
+  }
+  50% {
+      fill: #002fa7;
+      r: 2;
+      -webkit-filter: drop-shadow(0 0 2px #ff8da1);
+  }
+  75% {
+      fill: #002fa7;
+      r: 3.5;
+      -webkit-filter: drop-shadow(0 0 12px #ff8da1) 
+              drop-shadow(0 0 20px #39FF14) 
+              drop-shadow(0 0 30px #ff8da1);
+  }
+  100% {
+      fill: #002fa7;
+      r: 3;
+      -webkit-filter: drop-shadow(0 0 2px #ff8da1);
+  }
+}
+
+/* 为 iOS 设备专门添加媒体查询 */
+@supports (-webkit-touch-callout: none) {
+  #progress-dot {
+      display: block;
+      -webkit-animation: empPulse 1.5s ease-in-out infinite;
+      animation: empPulse 1.5s ease-in-out infinite;
+  }
+}
+
+/* 移动端通用样式 */
+@media (hover: none) {
+  #progress-dot {
+      display: block;
+      -webkit-animation: empPulse 1.5s ease-in-out infinite;
+      animation: empPulse 1.5s ease-in-out infinite;
+  }
+}
