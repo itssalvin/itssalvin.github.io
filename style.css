@@ -518,3 +518,24 @@ animation: activePulse 1s ease-in-out infinite !important;
       animation: empPulse 1.5s ease-in-out infinite;
   }
 }
+/* 最基础的动画版本 */
+@keyframes simpleGlow {
+  0% { fill:  #002fa7; r: 2; }
+  50% { fill:  #002fa7; r: 4; }
+  100% { fill: #002fa7; r: 2; }
+}
+
+@-webkit-keyframes simpleGlow {
+  0% { fill: #002fa7; r: 2; }
+  50% { fill:  #002fa7; r: 4; }
+  100% { fill: #002fa7; r: 2; }
+}
+
+/* 移动端和iOS设备使用简单动画 */
+@media (hover: none) {
+  #progress-dot {
+      display: block !important;
+      -webkit-animation: simpleGlow 1.5s ease-in-out infinite !important;
+      animation: simpleGlow 1.5s ease-in-out infinite !important;
+  }
+}
