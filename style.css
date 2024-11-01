@@ -1,4 +1,5 @@
-#background {
+/* 基础样式 */
+#background, #video-background {
   object-fit: cover;
   height: 100vh;
   width: 100vw;
@@ -7,27 +8,24 @@
   left: 0;
   right: 0;
   bottom: 0;
-  filter: blur(7px);
   z-index: -1;
-}
-#video-background {
-  object-fit: cover;
-  height: 100vh;
-  width: 100vw;
-  margin: auto;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  filter: blur(2px); /* 减小模糊程度 */
-  z-index: -1;
-  transition: filter 0.3s ease; /* 添加过渡效果 */
+  will-change: filter; /* 性能优化 */
 }
 
-/* 可以添加hover效果让视频更清晰 */
+#background {
+  filter: blur(7px);
+}
+
+#video-background {
+  filter: blur(2px);
+  transition: filter 0.3s ease;
+}
+
 #video-background:hover {
   filter: blur(1px);
 }
+
+/* 容器样式 */
 .outer-container {
   display: flex;
   justify-content: center;
@@ -47,13 +45,14 @@
   right: 0; 
   bottom: 0;
   overflow: hidden;
-  display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 30px;
   box-shadow: 0 0 30px #f94c57;
+  transform: translateZ(0); /* 启用GPU加速 */
 }
 
+/* 缩略图样式 */
 #thumbnail {
   position: absolute;
   object-fit: fill;
@@ -61,40 +60,36 @@
   width: 100%;
   transition: 1s;
   z-index: 3;
+  will-change: transform; /* 性能优化 */
 }
-/* 修改 box-wrapper */
+
+/* 控制面板样式 */
 .box-wrapper {
   position: absolute;
   border-radius: 20px;
   height: 45%;
   width: 100%;
-  bottom: -10%;  /* 只在wrapper中设置底部偏移 */
+  bottom: -10%;
   z-index: 5;
-  background: rgba(255, 255, 255, 0.1);  /* 微妙的白色背景 */
-  backdrop-filter: blur(12px);  /* 磨砂效果 */
-  -webkit-backdrop-filter: blur(12px);  /* Safari 支持 */
-  
-  /* 渐变叠加 */
   background: linear-gradient(
     135deg,
     rgba(255, 255, 255, 0.1) 0%,
     rgba(255, 255, 255, 0.05) 50%,
     rgba(255, 255, 255, 0) 100%
-   ) /* 背景色移到wrapper */
-} 
+  );
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
 
-/* 修改 box */
 .box {
-  position: absolute;  /* 改回absolute */
+  position: absolute;
   height: 100%;
   width: 100%;
-  top: 0;  /* 确保box完全覆盖wrapper */
+  top: 0;
   left: 0;
-  /* 删除 bottom: -10% */  /* 因为已经在wrapper中设置了 */
   display: grid;
   grid-template-columns: 35px 200px 80px;
   grid-template-rows: 85px 25px 25px;
-  border-radius: 20px;
   grid-template-areas:
     "one two three"
     "four four four"
@@ -102,37 +97,41 @@
   column-gap: 10px;
   overflow: hidden;
   opacity: 1;
-  
-  /* 删除 background-color，因为现在在wrapper中设置 */
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, 
+              rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, 
+              rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
 }
 
+/* 播放控制按钮样式 */
 .play-pause {
   grid-area: one;
   display: flex;
-  justify-content: center;  /* 改为居中 */
+  justify-content: center;
   align-items: center;
-  width: 100%;  /* 确保占满空间 */
-  height: 100%; 
-  padding:10px /* 确保占满空间 */
+  width: 100%;
+  height: 100%;
+  padding: 10px;
 }
+
 .vampire-btn {
-  font-size: 1.5rem;  /* 调小一点 */
+  font-size: 1.5rem;
   filter: grayscale(100%);
   transition: all 450ms ease;
   cursor: pointer;
-  margin: 0;  /* 移除所有边距 */
-  padding: 0;  /* 移除所有内边距 */
-  line-height: 1;  /* 确保垂直对齐 */
+  margin: 0;
+  padding: 0;
+  line-height: 1;
 }
+
 .vampire-btn.playing {
   filter: grayscale(0%) drop-shadow(0 8px 8px rgba(249, 76, 87, 0.5));
 }
+
 .vampire-btn:hover {
   transform: scale(1.55);
 }
 
-
+/* 曲目信息样式 */
 .track-info {
   grid-area: two;
   display: flex;
@@ -140,7 +139,6 @@
   justify-content: center;
   align-items: flex-start;
   padding-left: 5%;
-  /* border: 1px solid red; */
 }
 
 #track-artist {
@@ -157,83 +155,166 @@
   font-size: 1rem;
 }
 
+/* 导航按钮样式 */
 .next-prev {
   grid-area: three;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start; /* 改为flex-start让按钮靠上 */
-  align-items: flex-start; /* 改为flex-start让按钮靠左 */
+  justify-content: flex-start;
+  align-items: flex-start;
   width: 100%;
   height: 100%;
-  padding-top: 15px; /* 添加上边距 */
-  padding-right: 30px; /* 添加左边距 */
-  margin-right :20px;
+  padding-top: 15px;
+  padding-right: 30px;
+  margin-right: 20px;
 }
 
 .next-prev button {
   background: none;
   border: none;
   cursor: pointer;
-  font-size: 1.6rem; /* 调大字体 */
+  font-size: 1.6rem;
   padding: 3px;
   color: #333;
   transition: transform 0.2s ease;
   margin: 2px 0;
 }
 
-
-
 .next-prev button:hover {
   transform: scale(1.3);
-  color: #000; /* 悬停时变为黑色 */
+  color: #000;
 }
+
+/* 进度条样式 */
 .progress-bar {
   grid-area: four;
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
+  touch-action: none; /* 移动端优化 */
 }
 
 #progress {
-  width: 57.5%;  /* 保持原来进度条的宽度 */
+  width: 57.5%;
   height: 130px;
   fill: none;
-  color : #7c63de;
+  color: #7c63de;
 }
 
 .progress-path {
   stroke: #7c63de;
+  stroke-width: 3;
   stroke-dasharray: 0;
   stroke-dashoffset: 0;
   transition: stroke-dashoffset 0.1s linear;
-}
-#progress:hover .progress-path {
-  stroke: #8b74e8;  /* 悬停时颜色略微变亮 */
-}
-.progress-path {
-  /* 添加发光效果 */
   filter: drop-shadow(0 0 2px #7c63de);
-  /* 平滑过渡 */
-  transition: stroke 0.3s ease, filter 0.3s ease, stroke-dashoffset 0.1s linear;
 }
+
+#progress:hover .progress-path {
+  stroke: #8b74e8;
+  filter: drop-shadow(0 0 4px #7c63de);
+  stroke-width: 4;
+}
+
+#progress.dragging .progress-path {
+  stroke: #9985ff;
+  filter: drop-shadow(0 0 8px #7c63de);
+  stroke-width: 5;
+}
+
+/* 进度点动画 */
+@keyframes empPulse {
+    0% {
+        fill: #002fa7;
+        r: 2;
+        filter: drop-shadow(0 0 2px #39FF14);
+    }
+    25% {
+        fill:   #002fa7;
+        r: 3.5;
+        filter: drop-shadow(0 0 8px #b002ad) 
+                drop-shadow(0 0 15px #c9058e) 
+                drop-shadow(0 0 25px #c203bf);
+    }
+    50% {
+        fill:   #002fa7;
+        r: 2;
+        filter: drop-shadow(0 0 2px #ff8da1);
+    }
+    75% {
+        fill: #002fa7;
+        r: 3.5;
+        filter: drop-shadow(0 0 12px #ff8da1) 
+                drop-shadow(0 0 20px #39FF14) 
+                drop-shadow(0 0 30px #ff8da1);
+    }
+    100% {
+        fill:  #002fa7;
+        r: 3;
+        filter: drop-shadow(0 0 2px #ff8da1);
+    }
+}
+
+@keyframes activePulse {
+  0% {
+     fill: #002fa7;
+        r: 2;
+        filter: drop-shadow(0 0 2px #39FF14);
+  }
+  50% {
+    fill:   #002fa7;
+    r: 3.5;
+    filter: drop-shadow(0 0 8px #39FF14) 
+            drop-shadow(0 0 15px #39FF14) 
+            drop-shadow(0 0 25px #39FF14);
+  }
+  100% {
+    fill:  #002fa7;
+    r: 3;
+    filter: drop-shadow(0 0 2px #39FF14);
+  }
+}
+
+#progress-dot {
+  fill: #002fa7;
+  r: 2.5;
+  transform-origin: center;
+  pointer-events: none;
+  display: none;
+  animation: empPulse 1.5s ease-in-out infinite;
+  will-change: transform, filter; /* 性能优化 */
+}
+
+#progress:hover #progress-dot {
+  display: block;
+  animation: empPulse 2s ease-in-out infinite;
+}
+
+#progress-dot.active {
+  fill: #002fa7 !important;
+  animation: activePulse 1s ease-in-out infinite !important;
+}
+
+/* 时间显示样式 */
 .track-time {
   grid-area: five;
   display: flex;
   justify-content: space-around;
   align-items: flex-start;
-  /* border: 1px solid red; */
+}
+
+#currentTime, #durationTime {
+  font-family: "Rubik Wet Paint", sans-serif;
+  font-size: 1rem;
 }
 
 #currentTime {
-  font-family: "Rubik Wet Paint", sans-serif;
-  font-size: 1rem;
   color: white;
 }
 
 #durationTime {
-  font-family: "Rubik Wet Paint", sans-serif;
-  font-size: 1rem;
-  color: #f94c57;
+  color: #fdfdfd;
   text-shadow: 0 0 15px white;
 }
