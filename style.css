@@ -228,59 +228,6 @@
   stroke-width: 5;
 }
 
-/* 进度点动画 */
-@keyframes empPulse {
-    0% {
-        fill: #002fa7;
-        r: 2;
-        filter: drop-shadow(0 0 2px #39FF14);
-    }
-    25% {
-        fill: #002fa7;
-        r: 3.5;
-        filter: drop-shadow(0 0 8px #b002ad) 
-                drop-shadow(0 0 15px #c9058e) 
-                drop-shadow(0 0 25px #c203bf);
-    }
-    50% {
-        fill: #002fa7;
-        r: 2;
-        filter: drop-shadow(0 0 2px #ff8da1);
-    }
-    75% {
-        fill: #002fa7;
-        r: 3.5;
-        filter: drop-shadow(0 0 12px #ff8da1) 
-                drop-shadow(0 0 20px #39FF14) 
-                drop-shadow(0 0 30px #ff8da1);
-    }
-    100% {
-        fill: #002fa7;
-        r: 3;
-        filter: drop-shadow(0 0 2px #ff8da1);
-    }
-}
-
-@keyframes activePulse {
-  0% {
-    fill: #002fa7;
-    r: 2;
-    filter: drop-shadow(0 0 2px #39FF14);
-  }
-  50% {
-    fill: #002fa7;
-    r: 3.5;
-    filter: drop-shadow(0 0 8px #39FF14) 
-            drop-shadow(0 0 15px #39FF14) 
-            drop-shadow(0 0 25px #39FF14);
-  }
-  100% {
-    fill: #002fa7;
-    r: 3;
-    filter: drop-shadow(0 0 2px #39FF14);
-  }
-}
-
 /* 进度点基础样式 */
 #progress-dot {
   fill: #002fa7;
@@ -289,32 +236,111 @@
   pointer-events: none;
   will-change: transform, filter, r;
   animation: empPulse 1.5s ease-in-out infinite;
+  -webkit-animation: empPulse 1.5s ease-in-out infinite;
 }
 
-/* 桌面端进度点显示控制 */
-@media (hover: hover) {
-  #progress-dot {
-    display: none;
+/* 进度点动画 */
+@keyframes empPulse {
+  0%, 100% {
+    fill: #002fa7;
+    r: 2;
+    filter: drop-shadow(0 0 2px #39FF14);
+    -webkit-filter: drop-shadow(0 0 2px #39FF14);
   }
-  
-  #progress:hover #progress-dot {
-    display: block;
+  50% {
+    fill: #002fa7;
+    r: 3.5;
+    filter: drop-shadow(0 0 8px #b002ad) 
+            drop-shadow(0 0 15px #c9058e) 
+            drop-shadow(0 0 25px #c203bf);
+    -webkit-filter: drop-shadow(0 0 8px #b002ad) 
+                    drop-shadow(0 0 15px #c9058e) 
+                    drop-shadow(0 0 25px #c203bf);
   }
 }
 
-/* 移动端进度点显示控制 */
-/* 在你现有的CSS中添加这部分 */
-/* 只添加这个新的媒体查询，其他CSS保持不变 */
+@-webkit-keyframes empPulse {
+  0%, 100% {
+    fill: #002fa7;
+    r: 2;
+    -webkit-filter: drop-shadow(0 0 2px #39FF14);
+  }
+  50% {
+    fill: #002fa7;
+    r: 3.5;
+    -webkit-filter: drop-shadow(0 0 8px #b002ad) 
+                    drop-shadow(0 0 15px #c9058e) 
+                    drop-shadow(0 0 25px #c203bf);
+  }
+}
+
+/* 激活状态动画 */
+@keyframes activePulse {
+  0%, 100% {
+    fill: #002fa7;
+    r: 2;
+    filter: drop-shadow(0 0 2px #39FF14);
+    -webkit-filter: drop-shadow(0 0 2px #39FF14);
+  }
+  50% {
+    fill: #002fa7;
+    r: 3.5;
+    filter: drop-shadow(0 0 8px #39FF14) 
+            drop-shadow(0 0 15px #39FF14) 
+            drop-shadow(0 0 25px #39FF14);
+    -webkit-filter: drop-shadow(0 0 8px #39FF14) 
+                    drop-shadow(0 0 15px #39FF14) 
+                    drop-shadow(0 0 25px #39FF14);
+  }
+}
+
+@-webkit-keyframes activePulse {
+  0%, 100% {
+    fill: #002fa7;
+    r: 2;
+    -webkit-filter: drop-shadow(0 0 2px #39FF14);
+  }
+  50% {
+    fill: #002fa7;
+    r: 3.5;
+    -webkit-filter: drop-shadow(0 0 8px #39FF14) 
+                    drop-shadow(0 0 15px #39FF14) 
+                    drop-shadow(0 0 25px #39FF14);
+  }
+}
+
+/* 简化版动画（用于性能较低的设备） */
+@keyframes simpleGlow {
+  0%, 100% { fill: #002fa7; r: 2; }
+  50% { fill: #002fa7; r: 4; }
+}
+
+@-webkit-keyframes simpleGlow {
+  0%, 100% { fill: #002fa7; r: 2; }
+  50% { fill: #002fa7; r: 4; }
+}
+
+/* 移动端样式 */
 @media (hover: none) {
-    #progress-dot {
-        display: block;
-        animation: empPulse 1.5s ease-in-out infinite;
-    }
+  #progress-dot {
+    display: block !important;
+    animation: simpleGlow 1.5s ease-in-out infinite;
+    -webkit-animation: simpleGlow 1.5s ease-in-out infinite;
+  }
 }
+
+/* iOS 特定样式 */
+@supports (-webkit-touch-callout: none) {
+  #progress-dot {
+    display: block !important;
+  }
+}
+
 /* 激活状态的进度点 */
 #progress-dot.active {
   fill: #002fa7 !important;
   animation: activePulse 1s ease-in-out infinite !important;
+  -webkit-animation: activePulse 1s ease-in-out infinite !important;
 }
 
 /* 时间显示样式 */
@@ -337,205 +363,4 @@
 #durationTime {
   color: #fdfdfd;
   text-shadow: 0 0 15px white;
-}
-/* 只修改动画相关的代码，其他保持不变 */
-
-/* 修改进度点动画 */
-@keyframes empPulse {
-  0% {
-      fill: #002fa7;
-      r: 2;
-      -webkit-filter: drop-shadow(0 0 2px #39FF14);
-      filter: drop-shadow(0 0 2px #39FF14);
-  }
-  25% {
-      fill: #002fa7;
-      r: 3.5;
-      -webkit-filter: drop-shadow(0 0 8px #b002ad) 
-                     drop-shadow(0 0 15px #c9058e) 
-                     drop-shadow(0 0 25px #c203bf);
-      filter: drop-shadow(0 0 8px #b002ad) 
-             drop-shadow(0 0 15px #c9058e) 
-             drop-shadow(0 0 25px #c203bf);
-  }
-  50% {
-      fill: #002fa7;
-      r: 2;
-      -webkit-filter: drop-shadow(0 0 2px #ff8da1);
-      filter: drop-shadow(0 0 2px #ff8da1);
-  }
-  75% {
-      fill: #002fa7;
-      r: 3.5;
-      -webkit-filter: drop-shadow(0 0 12px #ff8da1) 
-                     drop-shadow(0 0 20px #39FF14) 
-                     drop-shadow(0 0 30px #ff8da1);
-      filter: drop-shadow(0 0 12px #ff8da1) 
-             drop-shadow(0 0 20px #39FF14) 
-             drop-shadow(0 0 30px #ff8da1);
-  }
-  100% {
-      fill: #002fa7;
-      r: 3;
-      -webkit-filter: drop-shadow(0 0 2px #ff8da1);
-      filter: drop-shadow(0 0 2px #ff8da1);
-  }
-}
-
-/* 修改激活状态动画 */
-@keyframes activePulse {
-0% {
-   fill: #002fa7;
-   r: 2;
-   -webkit-filter: drop-shadow(0 0 2px #39FF14);
-   filter: drop-shadow(0 0 2px #39FF14);
-}
-50% {
-  fill: #002fa7;
-  r: 3.5;
-  -webkit-filter: drop-shadow(0 0 8px #39FF14) 
-                 drop-shadow(0 0 15px #39FF14) 
-                 drop-shadow(0 0 25px #39FF14);
-  filter: drop-shadow(0 0 8px #39FF14) 
-         drop-shadow(0 0 15px #39FF14) 
-         drop-shadow(0 0 25px #39FF14);
-}
-100% {
-  fill: #002fa7;
-  r: 3;
-  -webkit-filter: drop-shadow(0 0 2px #39FF14);
-  filter: drop-shadow(0 0 2px #39FF14);
-}
-}
-
-/* 进度点样式优化 */
-#progress-dot {
-fill: #002fa7;
-r: 2.5;
-transform-origin: center;
--webkit-transform-origin: center;
-pointer-events: none;
-display: none;
--webkit-animation: empPulse 1.5s ease-in-out infinite;
-animation: empPulse 1.5s ease-in-out infinite;
-will-change: transform, filter;
-}
-
-#progress-dot.active {
-fill: #002fa7 !important;
--webkit-animation: activePulse 1s ease-in-out infinite !important;
-animation: activePulse 1s ease-in-out infinite !important;
-}
-/* 进度点动画 - 添加 webkit 前缀 */
-@keyframes empPulse {
-  0% {
-      fill: #002fa7;
-      r: 2;
-      -webkit-filter: drop-shadow(0 0 2px #39FF14);
-      filter: drop-shadow(0 0 2px #39FF14);
-  }
-  25% {
-      fill: #002fa7;
-      r: 3.5;
-      -webkit-filter: drop-shadow(0 0 8px #b002ad) 
-              drop-shadow(0 0 15px #c9058e) 
-              drop-shadow(0 0 25px #c203bf);
-      filter: drop-shadow(0 0 8px #b002ad) 
-              drop-shadow(0 0 15px #c9058e) 
-              drop-shadow(0 0 25px #c203bf);
-  }
-  50% {
-      fill: #002fa7;
-      r: 2;
-      -webkit-filter: drop-shadow(0 0 2px #ff8da1);
-      filter: drop-shadow(0 0 2px #ff8da1);
-  }
-  75% {
-      fill: #002fa7;
-      r: 3.5;
-      -webkit-filter: drop-shadow(0 0 12px #ff8da1) 
-              drop-shadow(0 0 20px #39FF14) 
-              drop-shadow(0 0 30px #ff8da1);
-      filter: drop-shadow(0 0 12px #ff8da1) 
-              drop-shadow(0 0 20px #39FF14) 
-              drop-shadow(0 0 30px #ff8da1);
-  }
-  100% {
-      fill: #002fa7;
-      r: 3;
-      -webkit-filter: drop-shadow(0 0 2px #ff8da1);
-      filter: drop-shadow(0 0 2px #ff8da1);
-  }
-}
-
-/* 添加 webkit 前缀的动画名称 */
-@-webkit-keyframes empPulse {
-  0% {
-      fill: #002fa7;
-      r: 2;
-      -webkit-filter: drop-shadow(0 0 2px #39FF14);
-  }
-  25% {
-      fill: #002fa7;
-      r: 3.5;
-      -webkit-filter: drop-shadow(0 0 8px #b002ad) 
-              drop-shadow(0 0 15px #c9058e) 
-              drop-shadow(0 0 25px #c203bf);
-  }
-  50% {
-      fill: #002fa7;
-      r: 2;
-      -webkit-filter: drop-shadow(0 0 2px #ff8da1);
-  }
-  75% {
-      fill: #002fa7;
-      r: 3.5;
-      -webkit-filter: drop-shadow(0 0 12px #ff8da1) 
-              drop-shadow(0 0 20px #39FF14) 
-              drop-shadow(0 0 30px #ff8da1);
-  }
-  100% {
-      fill: #002fa7;
-      r: 3;
-      -webkit-filter: drop-shadow(0 0 2px #ff8da1);
-  }
-}
-
-/* 为 iOS 设备专门添加媒体查询 */
-@supports (-webkit-touch-callout: none) {
-  #progress-dot {
-      display: block;
-      -webkit-animation: empPulse 1.5s ease-in-out infinite;
-      animation: empPulse 1.5s ease-in-out infinite;
-  }
-}
-
-/* 移动端通用样式 */
-@media (hover: none) {
-  #progress-dot {
-      display: block;
-      -webkit-animation: empPulse 1.5s ease-in-out infinite;
-      animation: empPulse 1.5s ease-in-out infinite;
-  }
-}
-/* 最基础的动画版本 */
-@keyframes simpleGlow {
-  0% { fill:  #002fa7; r: 2; }
-  50% { fill:  #002fa7; r: 4; }
-  100% { fill: #002fa7; r: 2; }
-}
-
-@-webkit-keyframes simpleGlow {
-  0% { fill: #002fa7; r: 2; }
-  50% { fill:  #002fa7; r: 4; }
-  100% { fill: #002fa7; r: 2; }
-}
-
-/* 移动端和iOS设备使用简单动画 */
-@media (hover: none) {
-  #progress-dot {
-      display: block !important;
-      -webkit-animation: simpleGlow 1.5s ease-in-out infinite !important;
-      animation: simpleGlow 1.5s ease-in-out infinite !important;
-  }
 }
