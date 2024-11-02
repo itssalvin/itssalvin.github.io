@@ -324,8 +324,11 @@
 @media (hover: none) {
   #progress-dot {
     display: block !important;
-    animation: simpleGlow 1.5s ease-in-out infinite;
-    -webkit-animation: simpleGlow 1.5s ease-in-out infinite;
+    animation: empPulse 1.5s ease-in-out infinite !important;
+    -webkit-animation: empPulse 1.5s ease-in-out infinite !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: none;
   }
 }
 
@@ -333,6 +336,22 @@
 @supports (-webkit-touch-callout: none) {
   #progress-dot {
     display: block !important;
+    animation: empPulse 1.5s ease-in-out infinite !important;
+    -webkit-animation: empPulse 1.5s ease-in-out infinite !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: none;
+    transform: translateZ(0); /* 启用硬件加速 */
+    -webkit-transform: translateZ(0);
+  }
+  
+  /* 确保动画效果在iOS上正常工作 */
+  @supports (-webkit-overflow-scrolling: touch) {
+    #progress-dot {
+      will-change: transform, filter, r;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+    }
   }
 }
 
